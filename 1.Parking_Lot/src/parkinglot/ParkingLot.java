@@ -25,12 +25,17 @@ public class ParkingLot {
 		levels.add(level);
 	}
 
-	public void parkVehicle(Vehicle bikeVehicle) {
+	public void parkVehicle(Vehicle bikeVehicle) throws ParkingUnavailableException {
+		boolean parked = false;
 		for (Level level : levels) {
 			if (level.parkVehicle(bikeVehicle)) {
 				System.out.println("Parked Vehicle" + bikeVehicle);
+				parked = true;
 				break;
 			}
+		}
+		if (parked == false) {
+			throw new ParkingUnavailableException("Parking Unavailable At the moment");
 		}
 	}
 
@@ -48,7 +53,7 @@ public class ParkingLot {
 		for (Level level : levels) {
 			level.displayAvailability();
 		}
-		
+
 	}
 
 }

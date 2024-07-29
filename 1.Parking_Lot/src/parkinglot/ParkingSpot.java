@@ -24,16 +24,17 @@ public class ParkingSpot {
 		return vehicle;
 	}
 
-	public boolean parkVehicle(Vehicle bikeVehicle) {
+	public synchronized boolean parkVehicle(Vehicle bikeVehicle) {
 		if (vehicle == null) {
 			vehicle = bikeVehicle;
 			type = bikeVehicle.getType();
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
-	public boolean unparkVehicle(Vehicle bikeVehicle) {
+	public synchronized boolean unparkVehicle(Vehicle bikeVehicle) {
 		if (vehicle == bikeVehicle && type == bikeVehicle.getType()) {
 			vehicle = null;
 			return true;
@@ -41,7 +42,7 @@ public class ParkingSpot {
 		return false;
 	}
 
-	public boolean isAvailable() {
+	public synchronized boolean isAvailable() {
 		return vehicle == null;
 	}
 

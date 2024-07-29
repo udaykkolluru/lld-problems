@@ -1,7 +1,6 @@
 package parkinglot;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import vehicle.Vehicle;
@@ -13,15 +12,15 @@ public class Level {
 	public Level(Integer floor, int spotsCount) {
 		this.floor = floor;
 		parkingSpots = new ArrayList<>(spotsCount);
-		for (int i = 1; i <= spotsCount; i++) {
-			parkingSpots.add(new ParkingSpot(i));
+		for (int i = 0; i < spotsCount; i++) {
+			parkingSpots.add(new ParkingSpot(i+1));
 		}
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean parkVehicle(Vehicle bikeVehicle) {
+	public boolean parkVehicle(Vehicle bikeVehicle){
 		for (ParkingSpot spot : parkingSpots) {
-			if (spot.parkVehicle(bikeVehicle)) {
+			if (spot.isAvailable() && spot.parkVehicle(bikeVehicle)) {
 				return true;
 			}
 		}
